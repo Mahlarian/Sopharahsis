@@ -3,4 +3,4 @@
 /data/servers.json
 /project.discordbot
 /launch.bat
-/.gitignore
+/node_modules
