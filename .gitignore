@@ -1,5 +1,6 @@
 /data/settings.json
 /data/players.json
 /data/servers.json
-project.discordbot
-launch.bat
+/project.discordbot
+/launch.bat
+/.gitignore
