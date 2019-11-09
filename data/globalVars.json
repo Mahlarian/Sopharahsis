@@ -1,0 +1,1 @@
+{"log-types":["memberJoin","memberLeave","channelCreate","channelDelete","roleCreate","roleDelete","memberBanned","memberUnbanned","vcCreate","vcDelete","msgDelete","serverUpdate","memberUpdate","channelUpdate","pinsUpdate","roleUpdate","msgUpdate","emojiUpdate","reactionRemoveAll"],"validCommands":["help","setaudit","editaudit","setwelcome","level"]}

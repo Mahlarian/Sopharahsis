@@ -1,0 +1,34 @@
+{
+    "commands":{
+        "setaudit":{
+            "alias": "N/A",
+            "usage": "s!setaudit (-disable)",
+            "description": "When used, will set the current channel as the audit channel (used for recording moderation actions and server updates). Append `-disable` to disable this feature.",
+            "permissionLevel": "Manage Guild"
+        },
+        "help":{
+            "alias": "N/A",
+            "usage": "s!help (commandname)",
+            "description": "Shows you this menu... or does it?",
+            "permissionLevel": "None"
+        },
+        "editaudit": {
+            "alias": "N/A",
+            "usage": "s!editaudit <action> <t or f>",
+            "description": "Let's you enable/disable recorded actions in the audit channel. Use the list below for the action names.\n\n`memberJoin`,`memberLeave`,`channelCreate`,`channelDelete`,`roleCreate`,`roleDelete`,`memberBanned`,`memberUnbannned`,`vcCreate`,`vcDelete`,`msgDelete`,`serverUpdate`,`memberUpdate`,`channelUpdate`,`pinsUpdate`,`roleUpdate`,`msgUpdate`,`emojiUpdate`,`reactionRemoveAll`",
+            "permissionLevel": "Manage Guild"
+        },
+        "level":{
+            "alias": "`lvl`",
+            "usage": "s!level",
+            "description":"Sends an info card about your level, how many messages you've sent, and how many you've sent in the server.",
+            "permissionLevel": "None"
+        },
+        "setwelcome":{
+            "alias": "N/A",
+            "usage": "s!setwelcome",
+            "description":"I don't have anything on this command yet, sorry :(",
+            "permissionLevel": "Manage Guild"
+        }
+    }
+}
