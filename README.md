@@ -6,3 +6,5 @@ You are more than welcome to use the code here as a learning foundation, however
 **If you are looking for help on this bot, please use the `s!help` command within a Discord server that has Sopharahsis. For more information, you can also visit the Wiki at the top of this page.**
 
 **Encounter an issue? Please send a report in the "Issues" tab at the top of this page. Issue status will be marked with a tag to confirm if they've been patched, re-created, or do not exist.**
+
+**If you are viewing the code, it is recommended you use a [JSON beautifier](http://jsonpathfinder.com/). Copy the raw code, and paste it in the box on the left, then click "beautify".**
