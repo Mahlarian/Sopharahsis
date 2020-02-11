@@ -1,0 +1,23 @@
+{
+  "name": "sopharahsis",
+  "version": "1.0.0",
+  "description": "A multi-purpose bot for Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahlarian/Sopharahsis.git"
+  },
+  "author": "Mahlarian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mahlarian/Sopharahsis/issues"
+  },
+  "homepage": "https://github.com/Mahlarian/Sopharahsis#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "eslint": "^6.8.0"
+  }
+}
