@@ -19,7 +19,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
 	const args = message.content.slice(config.prefix.length).split(/ +/);
@@ -33,7 +33,7 @@ client.on('message', message => {
 
 //Functions and stuff here
 
-function invalidUserPermission(permissionName, message) {
+async function invalidUserPermission(permissionName, message) {
 
 	function titleCase(str) {
         return str.replace(
@@ -48,5 +48,5 @@ function invalidUserPermission(permissionName, message) {
 		.setColor(config.color_red)
 		.setTitle("You can't run that command!")
 		.setDescription("The command you tried to run requires you to have the " + neededPermissions + " permission, which you currently do not have.");
-		message.channel.send(invalidUserPermissionMsg);
+		return message.channel.send(invalidUserPermissionMsg);
 }
