@@ -9,7 +9,10 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.login(config.token);
+
+client.login(config.token).catch(error => {
+	console.error("==========\nSomething happened and I wasn't able to log-in.\n==========\n" + error);
+});
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -27,8 +30,17 @@ client.on('message', async message => {
 
 	const commandObj = client.commands.get(command);
 	if (commandObj.requiredPermissions && !message.member.hasPermission(commandObj.requiredPermissions)) return invalidUserPermission(commandObj.requiredPermissions, message);
-	commandObj.execute(message, client, args);
-
+	try {
+		commandObj.execute(message, client, args);
+	}
+	catch (error) {
+		console.error("An issue ocurred occurred while running command \"" + commandObj.name + "\"\n" + error);
+		const genericErrorMsg = new Discord.RichEmbed()
+			.setColor(config.color_error)
+			.setTitle("An error occurred")
+			.setDescription("Something happened while running that command, and it was not completed successfully. This error has been logged.");
+			return message.channel.send(genericErrorMsg);
+	}
 });
 
 //Functions and stuff here
