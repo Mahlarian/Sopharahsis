@@ -27,9 +27,11 @@ client.on('message', async message => {
 
 	const args = message.content.slice(config.prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
+	const guild = message.guild;
 
 	const commandObj = client.commands.get(command);
 	if (commandObj.requiredPermissions && !message.member.hasPermission(commandObj.requiredPermissions)) return invalidUserPermission(commandObj.requiredPermissions, message);
+	if (commandObj.botPermissions && !guild.me.hasPermission(commandObj.botPermissions)) return invalidBotPermission(commandObj.botPermissions, message);
 	try {
 		commandObj.execute(message, client, args);
 	}
@@ -46,6 +48,24 @@ client.on('message', async message => {
 //Functions and stuff here
 
 async function invalidUserPermission(permissionName, message) {
+
+	function titleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+	}
+	const neededPermissions = permissionName.map(s => titleCase(s.replace('_', ' '))).join(', ');
+	const invalidUserPermissionMsg = new Discord.RichEmbed()
+		.setColor(config.color_red)
+		.setTitle("You can't run that command!")
+		.setDescription("The command you tried to run requires you to have the " + neededPermissions + " permission, which you currently do not have.");
+		return message.channel.send(invalidUserPermissionMsg);
+}
+
+async function invalidBotPermission(permissionName, message) {
 
 	function titleCase(str) {
         return str.replace(
