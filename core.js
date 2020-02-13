@@ -1,16 +1,16 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require('./config.json');
 const fs = require('fs');
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+client.config = require('./config.json');
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 
-client.login(config.token).catch(error => {
+client.login(client.config.token).catch(error => {
 	console.error("==========\nSomething happened and I wasn't able to log-in.\n==========\n" + error);
 });
 
@@ -23,22 +23,23 @@ for (const file of commandFiles) {
 }
 
 client.on('message', async message => {
-	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+	if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(config.prefix.length).split(/ +/);
+	const args = message.content.slice(client.config.prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
 	const guild = message.guild;
 
-	const commandObj = client.commands.get(command);
+	if (!client.commands.has(command)) return;
+		const commandObj = client.commands.get(command);
 	if (commandObj.requiredPermissions && !message.member.hasPermission(commandObj.requiredPermissions)) return invalidUserPermission(commandObj.requiredPermissions, message);
 	if (commandObj.botPermissions && !guild.me.hasPermission(commandObj.botPermissions)) return invalidBotPermission(commandObj.botPermissions, message);
 	try {
-		commandObj.execute(message, client, args);
+		await commandObj.execute(message, client, args);
 	}
 	catch (error) {
 		console.error("An issue ocurred occurred while running command \"" + commandObj.name + "\"\n" + error);
 		const genericErrorMsg = new Discord.RichEmbed()
-			.setColor(config.color_error)
+			.setColor(client.config.color_error)
 			.setTitle("An error occurred")
 			.setDescription("Something happened while running that command, and it was not completed successfully. This error has been logged.");
 			return message.channel.send(genericErrorMsg);
@@ -59,7 +60,7 @@ async function invalidUserPermission(permissionName, message) {
 	}
 	const neededPermissions = permissionName.map(s => titleCase(s.replace('_', ' '))).join(', ');
 	const invalidUserPermissionMsg = new Discord.RichEmbed()
-		.setColor(config.color_red)
+		.setColor(client.config.color_red)
 		.setTitle("You can't run that command!")
 		.setDescription("The command you tried to run requires you to have the " + neededPermissions + " permission, which you currently do not have.");
 		return message.channel.send(invalidUserPermissionMsg);
@@ -76,9 +77,9 @@ async function invalidBotPermission(permissionName, message) {
         );
 	}
 	const neededPermissions = permissionName.map(s => titleCase(s.replace('_', ' '))).join(', ');
-	const invalidUserPermissionMsg = new Discord.RichEmbed()
-		.setColor(config.color_red)
-		.setTitle("You can't run that command!")
-		.setDescription("The command you tried to run requires you to have the " + neededPermissions + " permission, which you currently do not have.");
-		return message.channel.send(invalidUserPermissionMsg);
+	const invalidBotPermissionMsg = new Discord.RichEmbed()
+		.setColor(client.config.color_red)
+		.setTitle("Unable to run command")
+		.setDescription("This command requires that I have the " + neededPermissions + " permissions to continue.");
+		return message.channel.send(invalidBotPermissionMsg);
 }

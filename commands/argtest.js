@@ -1,14 +1,20 @@
+const helpers = require('../helpers.js');
+
 module.exports = {
 	name: 'argtest',
     description: 'succ',
 	execute(message, _, args) {
-        if (!args.length) {
-            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+        if (args.length == 0) {
+            message.channel.send(message.author.id);
         }
-        else if (args[0] === 'foo') {
-            return message.channel.send('bar');
+        else {
+            const taggedUser = helpers.mentionToUserID(args[0]);
+            if (taggedUser == null) {
+                message.channel.send("Argument is not user");
+            }
+            else {
+                message.channel.send("User was tagged");
+            }
         }
-    
-        message.channel.send(`First argument: ${args[0]}`);
 	},
 };
