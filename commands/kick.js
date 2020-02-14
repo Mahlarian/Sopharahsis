@@ -12,7 +12,7 @@ module.exports = {
         if (args.length == 0) {
             const noArguments = new Discord.RichEmbed()
                 .setColor(client.config.color_red)
-                .setTitle("Incorrect Usage!")
+                .setTitle("Incorrect Usage")
                 .setDescription("You need to tag a user to kick them.\n\n**Correct Usage:** `s!kick <@user> (reason)`");
             return message.channel.send(noArguments);
         }
@@ -20,14 +20,14 @@ module.exports = {
         if (taggedUser == null) {
             const nonExistentUser = new Discord.RichEmbed()
                 .setColor(client.config.color_red)
-                .setTitle("Incorrect Usage!")
+                .setTitle("Incorrect Usage")
                 .setDescription("You need to tag a user to kick them.\n\n**Correct Usage:** `s!kick <@user> (reason)`");
             return message.channel.send(nonExistentUser);
         }
         if (taggedUser == message.author.id){
             const authorAsTarget = new Discord.RichEmbed()
                 .setColor(client.config.color_red)
-                .setTitle("Invalid user!")
+                .setTitle("Invalid user")
                 .setDescription("You cannot kick yourself!");
             return message.channel.send(authorAsTarget);
         }
@@ -36,7 +36,7 @@ module.exports = {
             await targetObject.kick();
             const success = new Discord.RichEmbed()
                 .setColor(client.config.color_green)
-                .setTitle("Success!")
+                .setTitle("Success")
                 .setDescription("User " + targetObject.user.username + " has been kicked from the server.");
             return message.channel.send(success);
         } catch (err) {

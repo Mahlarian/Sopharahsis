@@ -61,7 +61,7 @@ async function invalidUserPermission(permissionName, message) {
 	const neededPermissions = permissionName.map(s => titleCase(s.replace('_', ' '))).join(', ');
 	const invalidUserPermissionMsg = new Discord.RichEmbed()
 		.setColor(client.config.color_red)
-		.setTitle("You can't run that command!")
+		.setTitle("You can't run that command")
 		.setDescription("The command you tried to run requires you to have the " + neededPermissions + " permission, which you currently do not have.");
 		return message.channel.send(invalidUserPermissionMsg);
 }
