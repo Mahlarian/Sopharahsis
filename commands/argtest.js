@@ -1,7 +1,8 @@
 const helpers = require('../helpers.js');
 
 module.exports = {
-	name: 'argtest',
+    name: 'argtest',
+    cooldown: 0,
     description: 'succ',
 	execute(message, _, args) {
         if (args.length == 0) {

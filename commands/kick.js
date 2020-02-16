@@ -5,6 +5,7 @@ module.exports = {
     name: 'kick',
     usage: 'kick <@user> (reason)',
     description: 'Kicks the user, with optional reason',
+    cooldown: 3,
     guildOnly: true,
     requiredPermissions: ['KICK_MEMBERS'],
     botPermissions: ['KICK_MEMBERS'],
