@@ -47,13 +47,13 @@ client.on('message', async message => {
 	
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+			return commandCooldown(timeLeft, command.name, message);
 		}
 	}
 
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);	
-	
+
 	try {
 		await commandObj.execute(message, client, args);
 	}
@@ -68,6 +68,14 @@ client.on('message', async message => {
 });
 
 //Functions and stuff here
+
+async function commandCooldown(cmdTimeLeft, cmdName, message) {
+	const cooldownWarning = new Discord.RichEmbed()
+		.setColor(client.config.color_red)
+		.setTitle("Slow down!")
+		.setDescription("This command is still on cooldown for " + cmdTimeLeft.toFixed(1) + " seconds!");
+		return message.channel.send(cooldownWarning);
+}
 
 async function invalidUserPermission(permissionName, message) {
 
