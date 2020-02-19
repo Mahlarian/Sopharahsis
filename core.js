@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const cooldowns = new Discord.Collection();
+const sqlite3 = require('sqlite3').verbose();
+client.db = new sqlite3.Database('./database1.db');
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 client.config = require('./config.json');

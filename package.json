@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Mahlarian/Sopharahsis#readme",
   "dependencies": {
+    "common-tags": "^1.8.0",
     "discord.js": "^11.5.1",
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "sqlite3": "^4.1.1"
   }
 }
