@@ -4,10 +4,11 @@ module.exports = {
     description: '-',
     cooldown: 0,
     async execute(msg, client, _) {
-        client.db.run("SELECT `*` FROM `USERS` WHERE discordID=?", msg.author.id, function(err, row) {
+        client.db.get("SELECT * FROM `USERS` WHERE discordID=?", msg.author.id, function(err, row) {
             if (row == undefined) {
                 msg.channel.send("You do not exist... adding you.");
                 helpers.addUserToDB(msg.author.id, client.db);
+                console.log(err);
                 const commandObj = client.commands.get("sqlite");
                 commandObj.execute(msg, client, _);
             }
