@@ -61,7 +61,7 @@ client.on('message', async message => {
 	}
 	catch (error) {
 		console.error("An issue ocurred occurred while running command \"" + commandObj.name + "\"\n" + error);
-		const genericErrorMsg = new Discord.RichEmbed()
+		const genericErrorMsg = new Discord.MessageEmbed()
 			.setColor(client.config.color_error)
 			.setTitle("An error occurred")
 			.setDescription("Something happened while running that command, and it was not completed successfully. This error has been logged.");
@@ -72,7 +72,7 @@ client.on('message', async message => {
 //Functions and stuff here
 
 async function commandCooldown(cmdTimeLeft, cmdName, message) {
-	const cooldownWarning = new Discord.RichEmbed()
+	const cooldownWarning = new Discord.MessageEmbed()
 		.setColor(client.config.color_red)
 		.setTitle("Slow down!")
 		.setDescription("This command is still on cooldown for " + cmdTimeLeft.toFixed(1) + " seconds!");
@@ -90,7 +90,7 @@ async function invalidUserPermission(permissionName, message) {
         );
 	}
 	const neededPermissions = permissionName.map(s => titleCase(s.replace('_', ' '))).join(', ');
-	const invalidUserPermissionMsg = new Discord.RichEmbed()
+	const invalidUserPermissionMsg = new Discord.MessageEmbed()
 		.setColor(client.config.color_red)
 		.setTitle("You can't run that command")
 		.setDescription("The command you tried to run requires you to have the " + neededPermissions + " permission, which you currently do not have.");
@@ -108,7 +108,7 @@ async function invalidBotPermission(permissionName, message) {
         );
 	}
 	const neededPermissions = permissionName.map(s => titleCase(s.replace('_', ' '))).join(', ');
-	const invalidBotPermissionMsg = new Discord.RichEmbed()
+	const invalidBotPermissionMsg = new Discord.MessageEmbed()
 		.setColor(client.config.color_red)
 		.setTitle("Unable to run command")
 		.setDescription("This command requires that I have the " + neededPermissions + " permissions to continue.");

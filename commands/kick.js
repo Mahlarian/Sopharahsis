@@ -11,7 +11,7 @@ module.exports = {
     botPermissions: ['KICK_MEMBERS'],
     async execute(message, client, args) {
         if (args.length == 0) {
-            const noArguments = new Discord.RichEmbed()
+            const noArguments = new Discord.MessageEmbed()
                 .setColor(client.config.color_red)
                 .setTitle("Incorrect Usage")
                 .setDescription("You need to tag a user to kick them.\n\n**Correct Usage:** `s!kick <@user> (reason)`");
@@ -19,23 +19,23 @@ module.exports = {
         }
         const taggedUser = helpers.mentionToUserID(args[0]);
         if (taggedUser == null) {
-            const nonExistentUser = new Discord.RichEmbed()
+            const nonExistentUser = new Discord.MessageEmbed()
                 .setColor(client.config.color_red)
                 .setTitle("Incorrect Usage")
                 .setDescription("You need to tag a user to kick them.\n\n**Correct Usage:** `s!kick <@user> (reason)`");
             return message.channel.send(nonExistentUser);
         }
         if (taggedUser == message.author.id){
-            const authorAsTarget = new Discord.RichEmbed()
+            const authorAsTarget = new Discord.MessageEmbed()
                 .setColor(client.config.color_red)
                 .setTitle("Invalid user")
                 .setDescription("You cannot kick yourself!");
             return message.channel.send(authorAsTarget);
         }
-        const targetObject = await message.guild.fetchMember(taggedUser);
+        const targetObject = await message.guild.members.fetch(taggedUser);
         try {
             await targetObject.kick();
-            const success = new Discord.RichEmbed()
+            const success = new Discord.MessageEmbed()
                 .setColor(client.config.color_green)
                 .setTitle("Success")
                 .setDescription("User " + targetObject.user.username + " has been kicked from the server.");
@@ -43,7 +43,7 @@ module.exports = {
         } catch (err) {
             if (err instanceof Discord.DiscordAPIError){
                 if (err.code == 50013){
-                const higherRoleThanBot = new Discord.RichEmbed()
+                const higherRoleThanBot = new Discord.MessageEmbed()
                     .setColor(client.config.color_red)
                     .setTitle("Unable to kick user")
                     .setDescription("I'm unable to kick that user, as their role is higher than mine.");
