@@ -34,11 +34,16 @@ module.exports = {
         }
         const targetObject = await message.guild.members.fetch(taggedUser);
         try {
-            await targetObject.kick();
+            const displayReason = args.length > 1 ? args.slice(1).join(" ") : "No reason provided";
+            const reason = `Kicked by ${message.author.tag} : ${displayReason}`;
+
+            await targetObject.kick(reason);
             const success = new Discord.MessageEmbed()
                 .setColor(client.config.color_green)
                 .setTitle("Success")
-                .setDescription("User " + targetObject.user.username + " has been kicked from the server.");
+                .setDescription(`User ${targetObject.user.username} has been kicked from the server.`)
+                .addField("Reason:", displayReason)
+                .setTimestamp();
             return message.channel.send(success);
         } catch (err) {
             if (err instanceof Discord.DiscordAPIError){
@@ -49,6 +54,14 @@ module.exports = {
                     .setDescription("I'm unable to kick that user, as their role is higher than mine.");
                 return message.channel.send(higherRoleThanBot);
                 }
+            }
+            else {
+                console.log(`An issue has occurred while running s!kick\n ${err}`);
+                const higherRoleThanBot = new Discord.MessageEmbed()
+                    .setColor(client.config.color_red)
+                    .setTitle("Unknown error occurred")
+                    .setDescription("An unknown issue has occurred and that user couldn't be kicked. This error has been logged.");
+                return message.channel.send(higherRoleThanBot);
             }
         }
     },
