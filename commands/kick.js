@@ -57,11 +57,11 @@ module.exports = {
             }
             else {
                 console.log(`An issue has occurred while running s!kick\n ${err}`);
-                const higherRoleThanBot = new Discord.MessageEmbed()
+                const unknownErrorMsg = new Discord.MessageEmbed()
                     .setColor(client.config.color_red)
                     .setTitle("Unknown error occurred")
                     .setDescription("An unknown issue has occurred and that user couldn't be kicked. This error has been logged.");
-                return message.channel.send(higherRoleThanBot);
+                return message.channel.send(unknownErrorMsg);
             }
         }
     },
