@@ -61,6 +61,15 @@ client.on('message', async message => {
 	}
 	catch (error) {
 		console.error("An issue ocurred occurred while running command \"" + commandObj.name + "\"\n" + error);
+		const num = Math.floor((Math.random() * 1000) + 1);
+			if (num == 777) {
+				const specialErrorMsg = new Discord.MessageEmbed()
+				.setColor(client.config.color_error)
+				.setTitle("Oopsie Poopsie!")
+				.setDescription("I did a bad thing, and the command didn't work like it should've. I'm sorry :(\nBut hey! Don't feel bad, you got a special error message! This message only has a 0.1% chance of showing, so congratulations!");
+				return message.channel.send(specialErrorMsg);
+			}
+
 		const genericErrorMsg = new Discord.MessageEmbed()
 			.setColor(client.config.color_error)
 			.setTitle("An error occurred")
