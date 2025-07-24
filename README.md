@@ -1,4 +1,6 @@
-*This is the new version of Sopharahsis, for the old version that used DBM, see ARCHIVE branch*
+# This project is discontinued
+This repository will remain up as an archive, but no updates are planned and the discord bot client has been offline for years. Thanks for your interest.
+
 
 # What is Sopharahsis?
 Sopharahsis is a multi-function Discord bot that you can use in servers or in DM's. It includes utility, moderation, and fun commands as of now. Sopharahsis is also built with server security in mind, meaning you only need to give it Read/Send message permissions, and give it more permissions as you go along. You can check the wiki for permissions that Sopharahsis needs for commands.
